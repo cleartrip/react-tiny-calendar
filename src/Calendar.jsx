@@ -91,7 +91,6 @@ export default class Calendar extends Component {
         value={value}
         valueType="day"
         style={style}
-        key={index}
       />
     )
   }
