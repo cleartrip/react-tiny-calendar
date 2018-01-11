@@ -1,6 +1,6 @@
 {
   "name": "react-tiny-calendar",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "main": "dist/index.js",
   "es6": "src/index.js",
