@@ -1,9 +1,9 @@
 .react-calendar {
-  width: 350px;
+  width: 100%;
   max-width: 100%;
-  background: white;
-  border: 1px solid rgb(160, 160, 150);
-  font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
+  background: #efeff4;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.125em;
 
   &,
@@ -16,7 +16,6 @@
   }
 
   button {
-    border: 0;
     outline: none;
 
     &:not([disabled]) {
@@ -47,7 +46,21 @@
     }
   }
 
+  &__month-name {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.75em;
+  }
+
   &__month-view {
+
+    &__days {
+      background-color: #fff;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+    }
+
     &__weekdays {
       text-align: center;
       text-transform: uppercase;
@@ -142,11 +155,4 @@
       }
     }
   }
-}
-
-.react-calendar__month-name {
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 0.75em;
 }
