@@ -15,8 +15,8 @@
     "email": "me@sidharthachatterjee.com"
   },
   "dependencies": {
-    "lodash.once": "^4.1.1",
-    "merge-class-names": "^1.1.1",
+    "classnames": "^2.2.5",
+    "date-fns": "^1.29.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-tiny-virtual-list": "^2.1.4"

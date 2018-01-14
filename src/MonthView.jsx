@@ -1,47 +1,53 @@
 import React, { PureComponent } from 'react'
 
-import Days from './Days'
+import Flex from './Flex'
+import Day from './Day'
 import Weekdays from './Weekdays'
 
 import { formatMonthYear } from './lib/dateFormatter'
+import { getTileClasses } from './lib/utils'
+import { getDayOfWeek } from './lib/dates'
 
 export default class MonthView extends PureComponent {
-  get calendarType() {
-    const { calendarType } = this.props
-
-    if (calendarType) {
-      return calendarType
-    }
-
-    return 'ISO 8601'
-  }
-
   renderWeekdays() {
     const { calendarType } = this
     const { activeStartDate } = this.props
 
-    return <Weekdays calendarType={calendarType} month={activeStartDate} />
+    return <Weekdays calendarType={'ISO 8601'} month={activeStartDate} />
   }
 
   renderDays() {
-    const { calendarType, ...childProps } = this.props
+    const { modifiers, activeStartDate, onClick, index } = this.props
 
-    return <Days calendarType={this.calendarType} {...childProps} />
+    return (
+      <Flex
+        className="react-calendar__month-view__days"
+        count={7}
+        offset={getDayOfWeek(activeStartDate, 'ISO 8601')}
+        wrap
+      >
+        {Object.keys(modifiers).map(modifier => {
+          return (
+            <Day
+              onClick={onClick.bind(null, modifier, index)}
+              date={modifier}
+              modifiers={modifiers[modifier]}
+              currentMonthIndex={index}
+            />
+          )
+        })}
+      </Flex>
+    )
   }
 
   render() {
-    const className = 'react-calendar__month-view'
-
-    const { style, activeStartDate } = this.props
-
-    const label = formatMonthYear(activeStartDate)
-
+    const { style } = this.props
     return (
-      <div style={style} className={[className].join(' ')}>
-        <h3 className="react-calendar__month-name">{label}</h3>
+      <div style={style} className="react-calendar__month-view">
+        <h3 className="react-calendar__month-name">{'label'}</h3>
         <div style={{ display: 'flex', alignItems: 'flex-end' }}>
           <div style={{ flexGrow: 1 }}>
-            {/* {this.renderWeekdays()} */}
+            {this.renderWeekdays()}
             {this.renderDays()}
           </div>
         </div>

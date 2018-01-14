@@ -510,3 +510,22 @@ export const getISOLocalDate = value => {
 
   return `${year}-${month}-${day}`
 }
+
+import toISOMonthString from './toISOMonthString'
+import startOfMonth from 'date-fns/start_of_month'
+import lastDayOfMonth from 'date-fns/last_day_of_month'
+import eachDay from 'date-fns/each_day'
+import addMonths from 'date-fns/add_months'
+
+export function getVisibleDays(month, numberOfMonths) {
+  let visibleDaysByMonth = {}
+  let currentMonth = month
+  for (let i = 0; i < numberOfMonths; i += 1) {
+    visibleDaysByMonth[i] = eachDay(
+      startOfMonth(currentMonth),
+      lastDayOfMonth(currentMonth)
+    )
+    currentMonth = addMonths(currentMonth, 1)
+  }
+  return visibleDaysByMonth
+}
