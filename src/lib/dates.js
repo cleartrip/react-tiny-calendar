@@ -517,15 +517,27 @@ import lastDayOfMonth from 'date-fns/last_day_of_month'
 import eachDay from 'date-fns/each_day'
 import addMonths from 'date-fns/add_months'
 
-export function getVisibleDays(month, numberOfMonths) {
+export function getVisibleDays(months) {
   let visibleDaysByMonth = {}
   let currentMonth = month
   for (let i = 0; i < numberOfMonths; i += 1) {
-    visibleDaysByMonth[i] = eachDay(
+    visibleDaysByMonth[toISOMonthString(currentMonth)] = eachDay(
       startOfMonth(currentMonth),
       lastDayOfMonth(currentMonth)
     )
     currentMonth = addMonths(currentMonth, 1)
   }
   return visibleDaysByMonth
+}
+
+export function getMonths(initialMonth, numberOfMonths) {
+  let months = []
+  for (let i = 0; i < numberOfMonths; i += 1) {
+    const currentMonth = addMonths(initialMonth, i)
+    months.push({
+      ISOMonthString: toISOMonthString(currentMonth),
+      date: currentMonth
+    })
+  }
+  return months
 }

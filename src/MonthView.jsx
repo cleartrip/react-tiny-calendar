@@ -2,19 +2,23 @@ import React, { PureComponent } from 'react'
 
 import Flex from './Flex'
 import Day from './Day'
-import Weekdays from './Weekdays'
+// import Weekdays from './Weekdays'
 
 import { formatMonthYear } from './lib/dateFormatter'
 import { getTileClasses } from './lib/utils'
 import { getDayOfWeek } from './lib/dates'
 
-export default class MonthView extends PureComponent {
-  renderWeekdays() {
-    const { calendarType } = this
-    const { activeStartDate } = this.props
+import getDay from 'date-fns/get_day'
+import getISODay from 'date-fns/get_iso_day'
+import format from 'date-fns/format'
 
-    return <Weekdays calendarType={'ISO 8601'} month={activeStartDate} />
-  }
+export default class MonthView extends PureComponent {
+  // renderWeekdays() {
+  //   const { calendarType } = this
+  //   const { activeStartDate } = this.props
+
+  //   return <Weekdays calendarType={'ISO 8601'} month={activeStartDate} />
+  // }
 
   renderDays() {
     const { modifiers, activeStartDate, onClick, index } = this.props
@@ -23,7 +27,7 @@ export default class MonthView extends PureComponent {
       <Flex
         className="react-calendar__month-view__days"
         count={7}
-        offset={getDayOfWeek(activeStartDate, 'ISO 8601')}
+        offset={getDayOfWeek(activeStartDate)}
         wrap
       >
         {Object.keys(modifiers).map(modifier => {
@@ -41,13 +45,13 @@ export default class MonthView extends PureComponent {
   }
 
   render() {
-    const { style } = this.props
+    const { style, activeStartDate } = this.props
     return (
       <div style={style} className="react-calendar__month-view">
-        <h3 className="react-calendar__month-name">{'label'}</h3>
+        <h3 className="react-calendar__month-name">{}</h3>
         <div style={{ display: 'flex', alignItems: 'flex-end' }}>
           <div style={{ flexGrow: 1 }}>
-            {this.renderWeekdays()}
+            {/* {this.renderWeekdays()} */}
             {this.renderDays()}
           </div>
         </div>

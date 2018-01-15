@@ -16,7 +16,8 @@ import {
   getEnd,
   getValueRange,
   getDifferentMonth,
-  getVisibleDays
+  getVisibleDays,
+  getMonths
 } from './lib/dates'
 import { between, callIfDefined, mergeFunctions } from './lib/utils'
 
@@ -29,8 +30,9 @@ export default class Calendar extends Component {
       selected: day => this.isSelected(day),
       weekend: day => this.isWeekend(day)
     }
-    const { currentMonth, visibleDays } = this.getStateForNewMonth(props)
-    this.state = { currentMonth, visibleDays }
+    const months = getMonths(props.initialMonth, props.numberOfMonths)
+    const { currentMonth, visibleDays } = this.getStateForNewMonth(months)
+    this.state = { months, currentMonth, visibleDays }
   }
 
   addModifier = (updatedDays, day, modifier) => {
@@ -108,15 +110,13 @@ export default class Calendar extends Component {
     )
   }
 
-  getStateForNewMonth(nextProps) {
-    const { initialVisibleMonth, date, numberOfMonths } = nextProps
-    const initialVisibleMonthThunk =
-      initialVisibleMonth || (date ? () => date : () => this.today)
-    const currentMonth = initialVisibleMonthThunk()
-    const visibleDays = this.getModifiers(
-      getVisibleDays(currentMonth, numberOfMonths)
-    )
-    return { currentMonth, visibleDays }
+  getStateForNewMonth(months) {
+    // const { initialVisibleMonth, date, numberOfMonths } = nextProps
+    // const initialVisibleMonthThunk =
+    //   initialVisibleMonth || (date ? () => date : () => this.today)
+    // const currentMonth = initialVisibleMonthThunk()
+    const visibleDays = this.getModifiers(getVisibleDays(months))
+    return { currentMonth: this.today, visibleDays }
   }
 
   getModifiers(visibleDays) {
@@ -161,7 +161,9 @@ export default class Calendar extends Component {
     return (
       <MonthView
         activeStartDate={getDifferentMonth(currentMonth, index)}
-        modifiers={visibleDays[index]}
+        modifiers={
+          visibleDays[toISOMonthString(getDifferentMonth(currentMonth, index))]
+        }
         index={index}
         onClick={this.onClickDay}
         style={style}
@@ -175,16 +177,15 @@ export default class Calendar extends Component {
   }
 
   render() {
-    const { value } = this.props
+    const { value, numberOfMonths } = this.props
     return (
       <div className="react-calendar">
         <VirtualList
           value={value}
           width="auto"
           height={640}
-          itemCount={13}
+          itemCount={numberOfMonths}
           itemSize={296.5}
-          overscanCount={3}
           renderItem={this.renderMonthView}
         />
       </div>

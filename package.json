@@ -17,6 +17,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "date-fns": "^1.29.0",
+    "lodash.chunk": "^4.2.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-tiny-virtual-list": "^2.1.4"
