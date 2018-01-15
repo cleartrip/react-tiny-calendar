@@ -1,10 +1,19 @@
 import React, { Component } from 'react'
 import mergeClassNames from 'merge-class-names'
+
 import VirtualList from 'react-tiny-virtual-list'
+
+import differenceInCalendarISOWeeks from 'date-fns/difference_in_calendar_iso_weeks'
+import startOfMonth from 'date-fns/start_of_month'
+import endOfMonth from 'date-fns/end_of_month'
+import getISOWeek from 'date-fns/get_iso_week'
+
+import getDaysInMonth from 'date-fns/get_days_in_month'
 
 import MonthView from './MonthView'
 
-import { getBegin, getEnd, getValueRange, getDifferentMonth } from './lib/dates'
+
+import { getBegin, getEnd, getValueRange, getDifferentMonth, getISOLocalDate, getDayOfWeek } from './lib/dates'
 import { between, callIfDefined, mergeFunctions } from './lib/utils'
 
 export default class Calendar extends Component {
@@ -96,6 +105,8 @@ export default class Calendar extends Component {
   }
 
   render() {
+    const height = window.innerHeight - (45 + 26 + 39)
+
     const { className, selectRange } = this.props
     const { value, activeStartDate } = this.state
     const { onMouseOut } = this
@@ -118,14 +129,13 @@ export default class Calendar extends Component {
         className={mergeClassNames(
           'react-calendar',
           selectRange &&
-            valueArray.length === 1 &&
-            'react-calendar--selectRange',
+          valueArray.length === 1 &&
+          'react-calendar--selectRange',
           className
         )}
         onMouseOut={selectRange ? onMouseOut : null}
         onBlur={selectRange ? onMouseOut : null}
       >
-
         <div className="react-calendar__weeks">
           <span>Mo</span>
           <span>Tu</span>
@@ -138,9 +148,15 @@ export default class Calendar extends Component {
         <VirtualList
           value={value}
           width="auto"
-          height={622}
+          height={height}
           itemCount={13}
-          itemSize={330}
+          itemSize={index => {
+            const start = getDifferentMonth(activeStartDate, index)
+            const daysInMonth = getDaysInMonth(start)
+            const offset = getDayOfWeek(start)
+
+            return (Math.ceil((daysInMonth + offset) / 7) * 51) + 68
+          }}
           overscanCount={3}
           renderItem={this.renderMonthView}
           scrollToAlignment={'auto'}
