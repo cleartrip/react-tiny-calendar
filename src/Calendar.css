@@ -86,8 +86,10 @@
     border-bottom: 1px solid #ddd;
     height: 26px; }
     .react-calendar__weeks span {
+      flex: 1;
       font-size: 12px;
-      padding: 0 1em; }
+      width: 100%;
+      text-align: center; }
 
 button[disabled] {
   color: #eaeaea; }

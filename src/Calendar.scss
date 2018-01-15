@@ -168,8 +168,10 @@ $bgcolor: lighten(rgb(0, 110, 220), 30%);
     height: 26px;
 
     span {
+      flex: 1;
       font-size: 12px;
-      padding: 0 1em;
+      width: 100%;
+      text-align: center;
     }
   }
 }
