@@ -125,6 +125,16 @@ export default class Calendar extends Component {
         onMouseOut={selectRange ? onMouseOut : null}
         onBlur={selectRange ? onMouseOut : null}
       >
+
+        <div className="react-calendar__weeks">
+          <span>Mo</span>
+          <span>Tu</span>
+          <span>We</span>
+          <span>Th</span>
+          <span>Fr</span>
+          <span>Sa</span>
+          <span>Su</span>
+        </div>
         <VirtualList
           value={value}
           width="auto"
