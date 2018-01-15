@@ -128,9 +128,9 @@ export default class Calendar extends Component {
         <VirtualList
           value={value}
           width="auto"
-          height={500}
+          height={622}
           itemCount={13}
-          itemSize={235}
+          itemSize={330}
           overscanCount={3}
           renderItem={this.renderMonthView}
           scrollToAlignment={'auto'}
