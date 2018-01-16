@@ -75,6 +75,12 @@ export const getTileClasses = ({
 
   if (isValueWithinRange(date, valueRange)) {
     classes.push('react-calendar__tile--active')
+
+    if (value instanceof Date) {
+      classes.push(
+        'react-calendar__tile--papayawhip'
+      )
+    }
   }
 
   if (value instanceof Array) {
