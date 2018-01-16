@@ -3,11 +3,6 @@ import mergeClassNames from 'merge-class-names'
 
 import VirtualList from 'react-tiny-virtual-list'
 
-import differenceInCalendarISOWeeks from 'date-fns/difference_in_calendar_iso_weeks'
-import startOfMonth from 'date-fns/start_of_month'
-import endOfMonth from 'date-fns/end_of_month'
-import getISOWeek from 'date-fns/get_iso_week'
-
 import getDaysInMonth from 'date-fns/get_days_in_month'
 
 import MonthView from './MonthView'
@@ -107,7 +102,7 @@ export default class Calendar extends Component {
   render() {
     const height = window.innerHeight - (45 + 26 + 39)
 
-    const { className, selectRange } = this.props
+    const { className, selectRange, numberOfMonths } = this.props
     const { value, activeStartDate } = this.state
     const { onMouseOut } = this
     const valueArray = [].concat(value)
@@ -149,7 +144,7 @@ export default class Calendar extends Component {
           value={value}
           width="auto"
           height={height}
-          itemCount={13}
+          itemCount={numberOfMonths}
           itemSize={index => {
             const start = getDifferentMonth(activeStartDate, index)
             const daysInMonth = getDaysInMonth(start)
@@ -168,5 +163,6 @@ export default class Calendar extends Component {
 }
 
 Calendar.defaultProps = {
-  maxDetail: 'month'
+  maxDetail: 'month',
+  numberOfMonths: 13
 }
