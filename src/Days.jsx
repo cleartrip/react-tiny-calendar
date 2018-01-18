@@ -64,11 +64,18 @@ export default class Days extends PureComponent {
   render() {
     const { start, end, year, monthIndex } = this
 
-    const { activeStartDate, hover, value, valueType, ...dayProps } = this.props
+    const { activeStartDate, hover, value, valueType, minDate, selectRange, selectionState, ...dayProps } = this.props
 
     const days = []
     for (let day = start; day <= end; day += 1) {
       const date = new Date(year, monthIndex, day)
+
+      let min
+      if (selectionState === 'end') {
+        min = value[0]
+      } else {
+        min = minDate
+      }
 
       days.push(
         <Day
@@ -82,6 +89,7 @@ export default class Days extends PureComponent {
           currentMonthIndex={monthIndex}
           date={date}
           key={day}
+          minDate={min}
           {...dayProps}
         />
       )

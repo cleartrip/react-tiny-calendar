@@ -149,6 +149,18 @@ $bgcolor: lighten(rgb(0, 110, 220), 30%);
         }
       }
     }
+
+    &--start {
+      border-radius: 100% 0 0 100%;
+    }
+
+    &--end {
+      border-radius: 0 100% 100% 0;
+    }
+
+    &--papayawhip {
+      border-radius: 100%;
+    }
   }
 
   &--selectRange {

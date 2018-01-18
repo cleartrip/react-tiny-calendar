@@ -44,21 +44,21 @@ export default class Calendar extends Component {
   }
 
   onChange = value => {
-    const { selectRange } = this.props
+    const { selectRange, selectionState } = this.props
 
     let nextValue
     if (selectRange) {
       const { value: previousValue } = this.state
       // Range selection turned on
-      if (
-        !previousValue ||
-        [].concat(previousValue).length !== 1 // 0 or 2 - either way we're starting a new array
-      ) {
-        // First value
-        nextValue = getBegin('day', value)
-      } else {
-        // Second value
-        nextValue = getValueRange('day', previousValue, value)
+      if (selectionState === 'start') {
+        if (previousValue[1].getTime() < value.getTime()) {
+          nextValue = [value, value]
+        } else {
+          nextValue = [value, previousValue[1]]
+        }
+        callIfDefined(this.props.onChange, nextValue)
+      } else if (selectionState === 'end') {
+        nextValue = [previousValue[0], value]
         callIfDefined(this.props.onChange, nextValue)
       }
     } else {
@@ -77,7 +77,9 @@ export default class Calendar extends Component {
       minDate,
       renderChildren,
       tileClassName,
-      tileContent
+      tileContent,
+      selectRange,
+      selectionState
     } = this.props
     const { activeStartDate, value } = this.state
     const { onMouseOver } = this
@@ -95,6 +97,8 @@ export default class Calendar extends Component {
         value={value}
         valueType="day"
         style={style}
+        selectRange={selectRange}
+        selectionState={selectionState}
       />
     )
   }

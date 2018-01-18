@@ -1,5 +1,7 @@
 import { getRange } from './dates'
 
+import isSameDay from 'date-fns/is_same_day'
+
 /**
  * Returns a function that, when called, calls all the functions
  * passed to it, applying its arguments to them.
@@ -71,20 +73,23 @@ export const getTileClasses = ({
   const valueRange = value instanceof Array ? value : getRange(valueType, value)
   const dateRange = date instanceof Array ? date : getRange(dateType, date)
 
-  if (isRangeWithinRange(valueRange, dateRange)) {
+  if (isValueWithinRange(date, valueRange)) {
     classes.push('react-calendar__tile--active')
-  } else if (doRangesOverlap(valueRange, dateRange)) {
-    classes.push('react-calendar__tile--hasActive')
-  } else if (
-    hover &&
-    // Date before value
-    ((dateRange[1] < valueRange[0] &&
-      isRangeWithinRange([hover, valueRange[0]], dateRange)) ||
-      // Date after value
-      (dateRange[0] > valueRange[1] &&
-        isRangeWithinRange([valueRange[1], hover], dateRange)))
-  ) {
-    classes.push('react-calendar__tile--hover')
+
+    if (value instanceof Date) {
+      classes.push(
+        'react-calendar__tile--papayawhip'
+      )
+    }
+  }
+
+  if (value instanceof Array) {
+    if (isSameDay(date, value[0])) {
+      classes.push('react-calendar__tile--start')
+    }
+    if (isSameDay(date, value[1])) {
+      classes.push('react-calendar__tile--end')
+    }
   }
 
   return classes
