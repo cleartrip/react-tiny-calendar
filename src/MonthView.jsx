@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react'
 
 import Days from './Days'
-import Weekdays from './Weekdays'
 
-import { formatMonthYear } from './lib/dateFormatter'
+import format from 'date-fns/format'
 
 export default class MonthView extends PureComponent {
   get calendarType() {
@@ -16,12 +15,6 @@ export default class MonthView extends PureComponent {
     return 'ISO 8601'
   }
 
-  renderWeekdays() {
-    const { calendarType } = this
-    const { activeStartDate } = this.props
-
-    return <Weekdays calendarType={calendarType} month={activeStartDate} />
-  }
 
   renderDays() {
     const { calendarType, ...childProps } = this.props
@@ -34,14 +27,13 @@ export default class MonthView extends PureComponent {
 
     const { style, activeStartDate } = this.props
 
-    const label = formatMonthYear(activeStartDate)
+    const label = format(activeStartDate, "MMMM YYYY")
 
     return (
       <div style={style} className={[className].join(' ')}>
         <h3 className="react-calendar__month-name">{label}</h3>
         <div style={{ display: 'flex', alignItems: 'flex-end' }}>
           <div style={{ flexGrow: 1 }}>
-            {/* {this.renderWeekdays()} */}
             {this.renderDays()}
           </div>
         </div>
