@@ -30,7 +30,7 @@ const Flex = ({
         Object.assign({}, child.props, {
           style: Object.assign(
             {
-              flexBasis: toPercent(100 / count),
+              width: "14.28%",
               overflow: 'hidden'
             },
             offset &&
