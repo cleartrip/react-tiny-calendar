@@ -150,7 +150,7 @@ export default class Calendar extends Component {
             const daysInMonth = getDaysInMonth(start)
             const offset = getDayOfWeek(start)
 
-            return (Math.ceil((daysInMonth + offset) / 7) * 51) + 68
+            return (Math.ceil((daysInMonth + offset) / 7) * 62) + 68
           }}
           overscanCount={3}
           renderItem={this.renderMonthView}
