@@ -44,4 +44,6 @@ const Flex = ({
   </div>
 )
 
+Flex.displayName = "Flex"
+
 export default Flex
