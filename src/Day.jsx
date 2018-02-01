@@ -53,4 +53,6 @@ const Day = ({
   </button>
 )
 
+Day.displayName="Day"
+
 export default Day
