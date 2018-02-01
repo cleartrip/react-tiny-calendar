@@ -51,11 +51,7 @@ export default class Calendar extends Component {
       const { value: previousValue } = this.state
       // Range selection turned on
       if (selectionState === 'start') {
-        if (previousValue[1].getTime() < value.getTime()) {
-          nextValue = [value, value]
-        } else {
-          nextValue = [value, previousValue[1]]
-        }
+        nextValue = [value, value]
         callIfDefined(this.props.onChange, nextValue)
       } else if (selectionState === 'end') {
         nextValue = [previousValue[0], value]
