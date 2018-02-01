@@ -7,8 +7,8 @@
   line-height: 1.125em; }
   .react-calendar,
   .react-calendar *,
-  .react-calendar *:before,
-  .react-calendar *:after {
+  .react-calendar *::before,
+  .react-calendar *::after {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box; }
@@ -31,7 +31,7 @@
     text-align: center;
     font-size: 18px;
     margin-bottom: 20px;
-    margin-top: 30px; }
+    margin-top: 40px; }
   .react-calendar__month-view__days {
     background-color: #fff;
     border-top: 1px solid #ddd;
@@ -40,27 +40,19 @@
     text-align: center;
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 0.75em; }
+    font-size: .75em; }
     .react-calendar__month-view__weekdays__weekday {
-      padding: 0.5em; }
-  .react-calendar__month-view__weekNumbers {
-    font-weight: bold; }
-    .react-calendar__month-view__weekNumbers .react-calendar__tile {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      padding: calc(0.75em / 0.75) calc(0.5em / 0.75); }
+      padding: .5em; }
   .react-calendar__month-view__days__day--weekend {
     color: tomato; }
   .react-calendar__month-view__days__day--neighboringMonth {
     color: #969696; }
   .react-calendar__year-view .react-calendar__tile, .react-calendar__decade-view .react-calendar__tile, .react-calendar__century-view .react-calendar__tile {
-    padding: 2em 0.5em; }
+    padding: 2em .5em; }
   .react-calendar__tile {
     max-width: 100%;
     text-align: center;
-    padding: 1em;
+    padding: 1.255em 1em;
     background: none;
     font-size: 16px; }
     button .react-calendar__tile[disabled] {
@@ -77,9 +69,11 @@
       button .react-calendar__tile--active:not([disabled]):hover, button .react-calendar__tile--active:not([disabled]):focus {
         background: #1088ff; }
     .react-calendar__tile--start {
-      border-radius: 100% 0 0 100%; }
+      border-top-left-radius: 100%;
+      border-bottom-left-radius: 100%; }
     .react-calendar__tile--end {
-      border-radius: 0 100% 100% 0; }
+      border-top-right-radius: 100%;
+      border-bottom-right-radius: 100%; }
     .react-calendar__tile--papayawhip {
       border-radius: 100%; }
   .react-calendar--selectRange .react-calendar__tile--hover {
