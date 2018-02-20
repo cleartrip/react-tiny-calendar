@@ -20,33 +20,6 @@ $bgcolor: lighten(rgb(0, 110, 220), 30%);
   button {
     border: 0;
     outline: none;
-
-    &:not([disabled]) {
-      &:hover {
-        cursor: pointer;
-      }
-    }
-  }
-
-  &__navigation {
-    height: 44px;
-    margin-bottom: 1em;
-
-    button {
-      min-width: 44px;
-      background: none;
-
-      &:not([disabled]) {
-        &:hover,
-        &:focus {
-          background-color: rgb(230, 230, 230);
-        }
-      }
-
-      &[disabled] {
-        background-color: rgb(240, 240, 240);
-      }
-    }
   }
 
   &__month-name {
@@ -107,35 +80,14 @@ $bgcolor: lighten(rgb(0, 110, 220), 30%);
       color: blue;
     }
 
-    button &:not([disabled]) {
-      &:hover,
-      &:focus {
-        background-color: rgb(230, 230, 230);
-      }
-    }
-
     &--hasActive {
       background: $bgcolor;
-
-      button &:not([disabled]) {
-        &:hover,
-        &:focus {
-          background: lighten($bgcolor, 10%);
-        }
-      }
     }
 
     &--active {
       $bgcolor: rgb(0, 110, 220);
       background: $bgcolor;
       color: white;
-
-      button &:not([disabled]) {
-        &:hover,
-        &:focus {
-          background: lighten($bgcolor, 10%);
-        }
-      }
     }
 
     &--start {
@@ -150,14 +102,6 @@ $bgcolor: lighten(rgb(0, 110, 220), 30%);
 
     &--papayawhip {
       border-radius: 100%;
-    }
-  }
-
-  &--selectRange {
-    .react-calendar__tile {
-      &--hover {
-        background-color: rgb(230, 230, 230);
-      }
     }
   }
 
@@ -178,8 +122,6 @@ $bgcolor: lighten(rgb(0, 110, 220), 30%);
   }
 }
 
-button {
-  &[disabled] {
-    color: #eaeaea;
-  }
+.day-disabled {
+  color: #eaeaea;
 }
