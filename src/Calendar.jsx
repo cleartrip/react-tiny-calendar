@@ -100,7 +100,7 @@ export default class Calendar extends Component {
   }
 
   render() {
-    const height = window.innerHeight - (45 + 26 + 39)
+    const height = window.innerHeight - (26 + 39)
 
     const { className, selectRange, numberOfMonths } = this.props
     const { value, activeStartDate } = this.state
