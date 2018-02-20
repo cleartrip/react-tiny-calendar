@@ -18,40 +18,37 @@ const Day = ({
   maxDate,
   minDate,
   onClick,
-  onMouseOver,
   style,
   tileClassName,
   tileContent
-}) => (
-  <button
-    className={mergeClassNames(
-      className,
-      ...classes,
-      isWeekend(date) && `${className}--weekend`,
-      date.getMonth() !== currentMonthIndex && `${className}--neighboringMonth`,
-      tileClassName instanceof Function
-        ? tileClassName({ date, view: 'month' })
-        : tileClassName
-    )}
-    disabled={
-      (minDate && getBeginOfDay(minDate) > date) ||
-      (maxDate && getEndOfDay(maxDate) < date)
-    }
-    key={date}
-    onClick={onClick && (() => onClick(date))}
-    onMouseOver={onMouseOver && (() => onMouseOver(date))}
-    onFocus={onMouseOver && (() => onMouseOver(date))}
-    style={style}
-    type="button"
-  >
-    <time dateTime={`${getISOLocalDate(date)}T00:00:00.000`}>
-      {getDay(date)}
-    </time>
-    {typeof tileContent === 'function'
-      ? tileContent({ date, view: 'month' })
-      : tileContent}
-  </button>
-)
+}) => {
+  const isDisabled = (minDate && getBeginOfDay(minDate) > date) ||
+    (maxDate && getEndOfDay(maxDate) < date);
+  return (
+    <div
+      className={mergeClassNames(
+        className,
+        ...classes,
+        isDisabled && "day-disabled",
+        isWeekend(date) && `${className}--weekend`,
+        date.getMonth() !== currentMonthIndex && `${className}--neighboringMonth`,
+        tileClassName instanceof Function
+          ? tileClassName({ date, view: 'month' })
+          : tileClassName
+      )}
+      key={date}
+      onClick={!isDisabled && onClick && (() => onClick(date))}
+      style={style}
+    >
+      <time dateTime={`${getISOLocalDate(date)}T00:00:00.000`}>
+        {getDay(date)}
+      </time>
+      {typeof tileContent === 'function'
+        ? tileContent({ date, view: 'month' })
+        : tileContent}
+    </div>
+  )
+}
 
 Day.displayName="Day"
 
