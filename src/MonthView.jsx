@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 
-import Days from './Days'
+import Month from './Month'
 
 import format from 'date-fns/format'
 
@@ -17,9 +17,10 @@ export default class MonthView extends PureComponent {
 
 
   renderDays() {
+
     const { calendarType, ...childProps } = this.props
 
-    return <Days calendarType={this.calendarType} {...childProps} />
+    return <Month calendarType={this.calendarType} {...childProps} />
   }
 
   render() {

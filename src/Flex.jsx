@@ -10,6 +10,7 @@ const Flex = ({
   offset,
   style,
   wrap,
+  daySize,
   ...otherProps
 }) => (
   <div
@@ -30,7 +31,8 @@ const Flex = ({
         Object.assign({}, child.props, {
           style: Object.assign(
             {
-              width: "14.28%",
+              width: daySize,
+              height: daySize,
               overflow: 'hidden'
             },
             offset &&
