@@ -95,6 +95,7 @@ export default class Calendar extends Component {
         style={style}
         selectRange={selectRange}
         selectionState={selectionState}
+        daySize={ this.dayDimension }
       />
     )
   }
@@ -118,6 +119,8 @@ export default class Calendar extends Component {
     } else {
       scrollToIndex = 0
     }
+
+    this.dayDimension = window.innerWidth * 0.1428;
 
     return (
       <div
@@ -150,7 +153,10 @@ export default class Calendar extends Component {
             const daysInMonth = getDaysInMonth(start)
             const offset = getDayOfWeek(start)
 
-            return (Math.ceil((daysInMonth + offset) / 7) * 62) + 68
+            const asliHeight = (Math.ceil((daysInMonth + offset) / 7) * this.dayDimension) + 79;
+            // this.dayDimension = window.innerWidth/7 - Make the date a square first so that it becomes a proper circle.
+            //Magic number 79: Height of month label
+            return asliHeight;
           }}
           overscanCount={3}
           renderItem={this.renderMonthView}

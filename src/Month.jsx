@@ -64,7 +64,7 @@ export default class Days extends PureComponent {
   render() {
     const { start, end, year, monthIndex } = this
 
-    const { activeStartDate, hover, value, valueType, minDate, selectRange, selectionState, ...dayProps } = this.props
+    const { activeStartDate, hover, value, valueType, minDate, selectRange, selectionState, daySize, ...dayProps } = this.props
 
     const days = []
     for (let day = start; day <= end; day += 1) {
@@ -101,6 +101,7 @@ export default class Days extends PureComponent {
         count={7}
         offset={this.offset}
         wrap
+        daySize={ daySize }
       >
         {days}
       </Flex>
