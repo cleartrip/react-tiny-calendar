@@ -50,10 +50,6 @@ $bgcolor: lighten(rgb(0, 110, 220), 30%);
 
     &__days {
       &__day {
-        &--weekend {
-          color: tomato;
-        }
-
         &--neighboringMonth {
           color: rgb(150, 150, 150);
         }
